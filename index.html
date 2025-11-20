@@ -3,34 +3,225 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Freshers Quiz — Integrated</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <title>Freshers Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
+    /* Dark Theme Variables */
     :root{
-      --bg1:#f6f8fb; --card:#fff; --muted:#6b7280; --accent:#2563eb; --radius:12px; --text:#0f172a;
+      --bg-dark:#101827; /* Main Background */
+      --card-dark:#1f2937; /* Card/Surface */
+      --text-light:#f8fafc; /* Primary Text */
+      --muted-light:#94a3b8; /* Muted Text */
+      --accent:#8b5cf6; /* Vibrant Purple Accent */
+      --accent-hover:#9d71f6;
+      --success-light:#34d399; /* Green for success */
+      --warning-light:#f59e0b; /* Yellow/Orange for warnings */
+      --radius:14px;
     }
-    html,body{height:100%;margin:0;font-family:"Poppins",system-ui,Arial;color:var(--text);background:linear-gradient(180deg,#f6f8fb,#eef2ff);display:flex;align-items:center;justify-content:center;padding:20px;}
-    .container{width:100%;max-width:720px;background:var(--card);border-radius:14px;padding:20px;box-shadow:0 10px 30px rgba(16,24,40,0.08);}
-    .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
-    h1{margin:0;font-size:20px}
-    .splash{display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:10px;background:linear-gradient(180deg,rgba(0,0,0,0.01),transparent);text-align:center}
-    .inputs{display:flex;gap:8px;flex-direction:column;align-items:center}
-    input[type="text"]{width:100%;max-width:420px;padding:10px;border-radius:8px;border:1px solid #e6e9ef;font-size:14px}
-    .hint{font-size:13px;color:var(--muted)}
-    .start-btn{padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;border:0;cursor:pointer;font-weight:600}
-    .start-btn:disabled{opacity:0.6;cursor:not-allowed}
-    .progress-wrap{margin:12px 0}
-    .progress-inner{background:#eef6ff;height:10px;border-radius:999px;overflow:hidden}
-    .progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),#1e40af);transition:width .35s}
-    .card{padding:14px;border-radius:10px;background:linear-gradient(180deg,#fff, #fbfdff)}
-    .options{display:flex;flex-direction:column;gap:8px;margin-top:10px}
-    .option{padding:12px;border-radius:8px;border:1px solid #eef2ff;cursor:pointer}
-    .option.selected{background:linear-gradient(90deg,#eefdf6,#e6fbf3);border:1px solid rgba(16,185,129,0.14)}
-    #nextBtn{margin-top:12px;padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;border:0;cursor:pointer}
-    #nextBtn:disabled{opacity:0.6;cursor:not-allowed}
-    .result{margin-top:12px;text-align:center}
-    .small{font-size:13px;color:var(--muted)}
-    .status{font-size:13px;color:#0f172a;margin-top:8px}
+    /* Base Styles */
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:"Poppins",system-ui,Arial;
+      color:var(--text-light);
+      background:linear-gradient(135deg, var(--bg-dark) 0%, #0c121e 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+    /* Main Container */
+    .container{
+      width:100%;
+      max-width:720px;
+      background:var(--card-dark);
+      border-radius:18px;
+      padding:30px 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(139, 92, 246, 0.1);
+      transition: all 0.3s ease;
+      animation: fadeIn 0.8s ease-out;
+    }
+    /* Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:16px;
+    }
+    h1{
+      margin:0;
+      font-size:24px;
+      font-weight:800;
+      color:var(--accent);
+      text-shadow: 0 0 5px rgba(139, 92, 246, 0.5);
+    }
+    h2{
+        font-size: 24px;
+        font-weight: 700;
+        margin: 0;
+        color: var(--text-light);
+    }
+    h3 {
+        color: var(--text-light);
+        font-weight: 600;
+        font-size: 18px;
+    }
+    /* Splash Screen */
+    .splash{
+      display:flex;
+      flex-direction:column;
+      gap:15px;
+      padding:20px;
+      border-radius:14px;
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      text-align:center;
+      transition: all 0.3s ease;
+    }
+    .inputs{
+      display:flex;
+      gap:10px;
+      flex-direction:column;
+      align-items:center;
+    }
+    /* Inputs */
+    input[type="text"]{
+      width:100%;
+      max-width:420px;
+      padding:12px;
+      border-radius:10px;
+      border:1px solid #374151;
+      font-size:16px;
+      background:#374151;
+      color:var(--text-light);
+      transition: border-color 0.3s, box-shadow 0.3s;
+      outline: none;
+    }
+    input[type="text"]:focus{
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.4);
+    }
+    input::placeholder {
+        color: var(--muted-light);
+        opacity: 0.7;
+    }
+    .hint{
+      font-size:14px;
+      color:var(--muted-light);
+    }
+    /* Buttons */
+    .start-btn, #nextBtn{
+      padding:12px 20px;
+      border-radius:10px;
+      background:var(--accent);
+      color:var(--text-light);
+      border:0;
+      cursor:pointer;
+      font-weight:700;
+      font-size:16px;
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+      transition: background 0.2s, transform 0.1s, opacity 0.3s;
+    }
+    .start-btn:hover:not(:disabled), #nextBtn:hover:not(:disabled){
+        background: var(--accent-hover);
+        transform: translateY(-2px);
+    }
+    .start-btn:active:not(:disabled), #nextBtn:active:not(:disabled){
+        transform: translateY(0);
+        box-shadow: 0 2px 10px rgba(139, 92, 246, 0.3);
+    }
+    .start-btn:disabled, #nextBtn:disabled{
+      opacity:0.4;
+      cursor:not-allowed;
+      box-shadow: none;
+    }
+    /* Progress Bar */
+    .progress-wrap{margin:16px 0}
+    .progress-inner{background:#374151;height:12px;border-radius:999px;overflow:hidden;box-shadow: inset 0 1px 3px rgba(0,0,0,0.3)}
+    .progress-fill{
+        height:100%;
+        width:0;
+        background:linear-gradient(90deg,var(--accent),var(--success-light));
+        transition:width .4s ease-out;
+        border-radius:999px;
+    }
+    /* Question Card */
+    .card{
+        padding:20px;
+        border-radius:14px;
+        background: #2d3748;
+        border: 1px solid #374151;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    }
+    .options{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+    /* Options */
+    .option{
+        padding:14px;
+        border-radius:10px;
+        border:1px solid #374151;
+        color: var(--text-light);
+        background: #253040;
+        cursor:pointer;
+        text-align: left;
+        transition: all 0.2s ease;
+        font-weight: 500;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .option:hover{
+        background: #374151;
+        border-color: var(--muted-light);
+        transform: scale(1.01);
+    }
+    .option.selected{
+        background: linear-gradient(90deg, var(--accent), #5c53b6);
+        border: 1px solid var(--accent);
+        color: #fff;
+        box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);
+        transform: translateY(-1px);
+    }
+    #nextBtn{margin-top:20px; width: 100%;}
+    /* Result Area */
+    .result{margin-top:20px;text-align:center}
+    .small{font-size:14px;color:var(--muted-light)}
+    .status{font-size:14px;color:var(--text-light);margin-top:10px}
+    /* Custom Result Box */
+    .result-box{
+        padding:18px;
+        border-radius:14px;
+        background: #2d3748;
+        border: 1px solid var(--success-light);
+        box-shadow: 0 0 20px rgba(52, 211, 153, 0.2);
+    }
+    .result-score{
+        font-size:32px;
+        font-weight:800;
+        color:var(--success-light);
+    }
+    .result-percent{
+        margin-top:6px;
+        font-size:20px;
+        font-weight:700;
+        color: var(--text-light);
+    }
+    .result-meta{
+        margin-top:10px;
+        font-size:14px;
+        color:var(--muted-light);
+        padding-top: 10px;
+        border-top: 1px solid #374151;
+    }
+    /* Hints and Warnings */
+    #dupHint {
+        color: var(--warning-light) !important;
+        font-weight: 600;
+    }
+    .small:first-child {
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
@@ -42,14 +233,15 @@
 
     <!-- SPLASH with name + serial -->
     <div id="splash" class="splash" role="dialog" aria-modal="true">
-      <h2>✨ Welcome Freshers — Prepare to Lose Your Brains… Politely ✨</h2>
+      <!-- Updated welcome text for Gen Z feel -->
+      <h2>✨ Welcome Freshers — Let the Shenanigans Begin! ✨</h2>
       <div class="inputs">
-        <input id="playerName" type="text" placeholder="Enter your name" aria-label="Player name" />
-        <input id="serialNo" type="text" placeholder="Enter your serial no. (e.g. 01)" aria-label="Serial number" />
+        <input id="playerName" type="text" placeholder="Enter your official name" aria-label="Player name" />
+        <input id="serialNo" type="text" placeholder="Enter your Serial No. (e.g. 01)" aria-label="Serial number" />
         <div id="splashHint" class="hint">Please fill both fields to enable Start.</div>
       </div>
       <button id="startBtn" class="start-btn" disabled>Start Quiz</button>
-      <div id="dupHint" class="small" style="color:#b45309;display:none">Warning: This serial already submitted on this device.</div>
+      <div id="dupHint" class="small" style="display:none">Warning: This serial already submitted on this device.</div>
     </div>
 
     <!-- QUIZ AREA -->
@@ -60,7 +252,7 @@
       </div>
 
       <section class="card" id="card">
-        <h3 id="qtitle" style="margin:0 0 6px 0">Question</h3>
+        <h3 id="qtitle" style="margin:0 0 10px 0">Question</h3>
         <div id="options" class="options" role="list"></div>
         <button id="nextBtn" disabled>Next →</button>
         <div id="submissionStatus" class="status" aria-live="polite"></div>
@@ -150,7 +342,13 @@
       participant.serial = serialInput.value.trim();
       splash.style.display = 'none';
       quizArea.style.display = 'block';
-      setTimeout(() => renderQuestion(), 80);
+      // Ensure smooth transition to the first question
+      quizArea.style.opacity = '0';
+      setTimeout(() => {
+        quizArea.style.opacity = '1';
+        quizArea.style.transition = 'opacity 0.5s ease-in-out';
+        renderQuestion();
+      }, 80);
     });
 
     // render questions
@@ -191,20 +389,27 @@
     });
 
     function updateProgress(){
-      const pct = Math.round((currentQuestion / quizData.length) * 100);
+      const pct = Math.round(((currentQuestion + 1) / quizData.length) * 100);
       progressFill.style.width = pct + '%';
       progressText.textContent = `Question ${currentQuestion + 1} / ${quizData.length}`;
+      if (currentQuestion === quizData.length - 1) {
+        nextBtn.textContent = 'Submit Score →';
+      } else {
+        nextBtn.textContent = 'Next →';
+      }
     }
 
     function showResult(){
       nextBtn.style.display = 'none';
       const percent = ((score/quizData.length)*100).toFixed(1);
       resultArea.style.display = 'block';
+      // Using new result box classes for dark theme styling
       resultArea.innerHTML = `
-        <div style="padding:12px;border-radius:10px;background:linear-gradient(180deg,rgba(16,185,129,0.06),#fff);border:1px solid rgba(16,185,129,0.06)">
-          <div style="font-size:20px;font-weight:700">${score} / ${quizData.length}</div>
-          <div style="margin-top:6px;font-size:16px">${percent}% — ${percent>=70?'Excellent':percent>=40?'Good Try':'Keep Practicing'}</div>
-          <div style="margin-top:8px;font-size:13px;color:#6b7280"><strong>Name:</strong> ${escapeHtml(participant.name)} &nbsp; | &nbsp; <strong>Serial:</strong> ${escapeHtml(participant.serial)}</div>
+        <div class="result-box">
+          <div class="result-score">${score} / ${quizData.length}</div>
+          <!-- Updated score text for Gen Z vibe -->
+          <div class="result-percent">${percent}% — ${percent>=70?'Excellent 😎':percent>=40?'Good Try 🙂':'Keep Practicing, Fams 🤓'}</div>
+          <div class="result-meta"><strong>Name:</strong> ${escapeHtml(participant.name)} &nbsp; | &nbsp; <strong>Serial:</strong> ${escapeHtml(participant.serial)}</div>
         </div>
       `;
       progressFill.style.width = '100%';
@@ -214,7 +419,7 @@
       submitToGoogleForm({ name: participant.name, serial: participant.serial, score, percent })
         .then(res=>{
           if (res.ok){
-            submissionStatus.textContent = 'Result submitted successfully.';
+            submissionStatus.textContent = 'Result submitted successfully. Thanks for playing!';
             markSerialSubmitted(participant.serial);
           } else {
             submissionStatus.textContent = 'Could not submit online — saved locally for organizer.';
@@ -279,7 +484,7 @@
     }
     function downloadLocalResultsCSV(){
       const arr = JSON.parse(localStorage.getItem(LOCAL_RESULTS_KEY) || '[]');
-      if (!arr.length) return alert('No local results.');
+      if (!arr.length) return; // Silent return instead of alert
       const headers = ['Name','Serial','Score','Percent','Timestamp'];
       const rows = arr.map(r => [csvEscape(r.name),csvEscape(r.serial),r.score,r.percent,r.ts].join(','));
       const csv = [headers.join(','), ...rows].join('\n');
@@ -299,3 +504,4 @@
   </script>
 </body>
 </html>
+

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Freshers Quiz — Integrated</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#f6f8fb; --card:#fff; --muted:#6b7280; --accent:#2563eb; --radius:12px; --text:#0f172a;
+    }
+    html,body{height:100%;margin:0;font-family:"Poppins",system-ui,Arial;color:var(--text);background:linear-gradient(180deg,#f6f8fb,#eef2ff);display:flex;align-items:center;justify-content:center;padding:20px;}
+    .container{width:100%;max-width:720px;background:var(--card);border-radius:14px;padding:20px;box-shadow:0 10px 30px rgba(16,24,40,0.08);}
+    .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+    h1{margin:0;font-size:20px}
+    .splash{display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:10px;background:linear-gradient(180deg,rgba(0,0,0,0.01),transparent);text-align:center}
+    .inputs{display:flex;gap:8px;flex-direction:column;align-items:center}
+    input[type="text"]{width:100%;max-width:420px;padding:10px;border-radius:8px;border:1px solid #e6e9ef;font-size:14px}
+    .hint{font-size:13px;color:var(--muted)}
+    .start-btn{padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;border:0;cursor:pointer;font-weight:600}
+    .start-btn:disabled{opacity:0.6;cursor:not-allowed}
+    .progress-wrap{margin:12px 0}
+    .progress-inner{background:#eef6ff;height:10px;border-radius:999px;overflow:hidden}
+    .progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),#1e40af);transition:width .35s}
+    .card{padding:14px;border-radius:10px;background:linear-gradient(180deg,#fff, #fbfdff)}
+    .options{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+    .option{padding:12px;border-radius:8px;border:1px solid #eef2ff;cursor:pointer}
+    .option.selected{background:linear-gradient(90deg,#eefdf6,#e6fbf3);border:1px solid rgba(16,185,129,0.14)}
+    #nextBtn{margin-top:12px;padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;border:0;cursor:pointer}
+    #nextBtn:disabled{opacity:0.6;cursor:not-allowed}
+    .result{margin-top:12px;text-align:center}
+    .small{font-size:13px;color:var(--muted)}
+    .status{font-size:13px;color:#0f172a;margin-top:8px}
+  </style>
+</head>
+<body>
+  <div class="container" role="main">
+    <div class="header">
+      <h1>Freshers Quiz</h1>
+      <div class="small">Seniors are watching 👀</div>
+    </div>
+
+    <!-- SPLASH with name + serial -->
+    <div id="splash" class="splash" role="dialog" aria-modal="true">
+      <h2>✨ Welcome Freshers — Prepare to Lose Your Brains… Politely ✨</h2>
+      <div class="inputs">
+        <input id="playerName" type="text" placeholder="Enter your name" aria-label="Player name" />
+        <input id="serialNo" type="text" placeholder="Enter your serial no. (e.g. 01)" aria-label="Serial number" />
+        <div id="splashHint" class="hint">Please fill both fields to enable Start.</div>
+      </div>
+      <button id="startBtn" class="start-btn" disabled>Start Quiz</button>
+      <div id="dupHint" class="small" style="color:#b45309;display:none">Warning: This serial already submitted on this device.</div>
+    </div>
+
+    <!-- QUIZ AREA -->
+    <div id="quizArea" style="display:none">
+      <div class="progress-wrap">
+        <div class="small" id="progressText">Question 1 / 10</div>
+        <div class="progress-inner"><div id="progressFill" class="progress-fill"></div></div>
+      </div>
+
+      <section class="card" id="card">
+        <h3 id="qtitle" style="margin:0 0 6px 0">Question</h3>
+        <div id="options" class="options" role="list"></div>
+        <button id="nextBtn" disabled>Next →</button>
+        <div id="submissionStatus" class="status" aria-live="polite"></div>
+      </section>
+
+      <div id="resultArea" class="result" style="display:none"></div>
+    </div>
+  </div>
+
+  <script>
+    /* ========== CONFIG: filled from your prefill link ========== */
+    const FORM_ACTION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSefxXQZK7JXFIjp7jgQbNL23DJKNrEo3c__3CIl83ymbEcR0A/formResponse';
+    const ENTRY_NAME = 'entry.69998990';    // Name
+    const ENTRY_SERIAL = 'entry.1113296880';// Serial No
+    const ENTRY_SCORE = 'entry.756546173';  // Score
+    const ENTRY_PERCENT = '';               // no percent entry in provided prefill link (optional)
+    /* ================================================================== */
+
+    // quiz data
+    const quizData = [
+      {question: "Which particle in an atom has a negative charge?", options: ["Proton","Electron","Neutron","Photon"], correct:1},
+      {question: "What is the chemical formula for water?", options: ["H2O","CO2","O2","NaCl"], correct:0},
+      {question: "Which planet is known as the Red Planet?", options: ["Mercury","Venus","Mars","Jupiter"], correct:2},
+      {question: "What is the SI unit of force?", options: ["Joule","Newton","Watt","Pascal"], correct:1},
+      {question: "What is the powerhouse of the cell?", options: ["Nucleus","Mitochondria","Ribosome","Golgi apparatus"], correct:1},
+      {question: "Which organ pumps blood?", options: ["Liver","Heart","Kidney","Lungs"], correct:1},
+      {question: "Light year is a unit of?", options: ["Time","Distance","Mass","Energy"], correct:1},
+      {question: "Symbol Fe belongs to?", options: ["Iron","Fluorine","Francium","Fermium"], correct:0},
+      {question: "Plants use which gas for photosynthesis?", options: ["Oxygen","Carbon Dioxide","Nitrogen","Helium"], correct:1},
+      {question: "Which law states action-reaction?", options: ["1st Law","2nd Law","3rd Law","Gravitation"], correct:2}
+    ];
+
+    // state
+    let currentQuestion = 0, score = 0, selectedAnswer = null;
+    const participant = { name:'', serial:'' };
+
+    // elements
+    const playerNameInput = document.getElementById('playerName');
+    const serialInput = document.getElementById('serialNo');
+    const startBtn = document.getElementById('startBtn');
+    const dupHint = document.getElementById('dupHint');
+    const splashHint = document.getElementById('splashHint');
+    const splash = document.getElementById('splash');
+    const quizArea = document.getElementById('quizArea');
+    const optionsEl = document.getElementById('options');
+    const qtitle = document.getElementById('qtitle');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressText = document.getElementById('progressText');
+    const progressFill = document.getElementById('progressFill');
+    const resultArea = document.getElementById('resultArea');
+    const submissionStatus = document.getElementById('submissionStatus');
+
+    // duplicate serial prevention (local device)
+    const SUBMITTED_KEY = 'freshers_submitted_serials_v1';
+    function getSubmittedSerials(){ try { return JSON.parse(localStorage.getItem(SUBMITTED_KEY) || '[]'); } catch(e){ return []; } }
+    function markSerialSubmitted(serial){ const arr = getSubmittedSerials(); if (!arr.includes(serial)) arr.push(serial); localStorage.setItem(SUBMITTED_KEY, JSON.stringify(arr)); }
+
+    function checkStartEnabled(){
+      const name = playerNameInput.value.trim();
+      const serial = serialInput.value.trim();
+      const submitted = getSubmittedSerials();
+      if (name && serial) {
+        if (submitted.includes(serial)){
+          dupHint.style.display = 'block';
+          startBtn.disabled = true;
+          splashHint.textContent = 'Serial already used on this device. Ask organizer to override if needed.';
+        } else {
+          dupHint.style.display = 'none';
+          startBtn.disabled = false;
+          splashHint.textContent = 'Ready — click Start to begin the quiz.';
+        }
+      } else {
+        startBtn.disabled = true;
+        dupHint.style.display = 'none';
+        splashHint.textContent = 'Please fill both fields to enable Start.';
+      }
+    }
+
+    playerNameInput.addEventListener('input', checkStartEnabled);
+    serialInput.addEventListener('input', checkStartEnabled);
+    playerNameInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ e.preventDefault(); serialInput.focus(); }});
+    serialInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter' && !startBtn.disabled){ e.preventDefault(); startBtn.click(); }});
+
+    // start
+    startBtn.addEventListener('click', () => {
+      participant.name = playerNameInput.value.trim();
+      participant.serial = serialInput.value.trim();
+      splash.style.display = 'none';
+      quizArea.style.display = 'block';
+      setTimeout(() => renderQuestion(), 80);
+    });
+
+    // render questions
+    function renderQuestion(){
+      selectedAnswer = null;
+      nextBtn.disabled = true;
+      resultArea.style.display = 'none';
+      submissionStatus.textContent = '';
+      const q = quizData[currentQuestion];
+      qtitle.textContent = q.question;
+      optionsEl.innerHTML = '';
+      q.options.forEach((opt, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'option';
+        b.textContent = opt;
+        b.onclick = () => selectOption(i,b);
+        b.onkeydown = (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); selectOption(i,b); } };
+        optionsEl.appendChild(b);
+      });
+      updateProgress();
+      const f = optionsEl.querySelector('.option');
+      if (f) f.focus();
+    }
+
+    function selectOption(i,el){
+      document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedAnswer = i;
+      nextBtn.disabled = false;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (selectedAnswer === null) return;
+      if (selectedAnswer === quizData[currentQuestion].correct) score++;
+      currentQuestion++;
+      if (currentQuestion < quizData.length) renderQuestion(); else showResult();
+    });
+
+    function updateProgress(){
+      const pct = Math.round((currentQuestion / quizData.length) * 100);
+      progressFill.style.width = pct + '%';
+      progressText.textContent = `Question ${currentQuestion + 1} / ${quizData.length}`;
+    }
+
+    function showResult(){
+      nextBtn.style.display = 'none';
+      const percent = ((score/quizData.length)*100).toFixed(1);
+      resultArea.style.display = 'block';
+      resultArea.innerHTML = `
+        <div style="padding:12px;border-radius:10px;background:linear-gradient(180deg,rgba(16,185,129,0.06),#fff);border:1px solid rgba(16,185,129,0.06)">
+          <div style="font-size:20px;font-weight:700">${score} / ${quizData.length}</div>
+          <div style="margin-top:6px;font-size:16px">${percent}% — ${percent>=70?'Excellent':percent>=40?'Good Try':'Keep Practicing'}</div>
+          <div style="margin-top:8px;font-size:13px;color:#6b7280"><strong>Name:</strong> ${escapeHtml(participant.name)} &nbsp; | &nbsp; <strong>Serial:</strong> ${escapeHtml(participant.serial)}</div>
+        </div>
+      `;
+      progressFill.style.width = '100%';
+      progressText.textContent = 'Completed';
+
+      // Submit to Google Form (hidden auto-submit)
+      submitToGoogleForm({ name: participant.name, serial: participant.serial, score, percent })
+        .then(res=>{
+          if (res.ok){
+            submissionStatus.textContent = 'Result submitted successfully.';
+            markSerialSubmitted(participant.serial);
+          } else {
+            submissionStatus.textContent = 'Could not submit online — saved locally for organizer.';
+            saveResultLocally(participant.name, participant.serial, score, percent);
+          }
+        }).catch(err=>{
+          submissionStatus.textContent = 'Network error — result saved locally.';
+          saveResultLocally(participant.name, participant.serial, score, percent);
+        });
+    }
+
+    function escapeHtml(s){ if(!s) return ''; return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+    // submit to Google Form by creating & posting a hidden form (avoids CORS)
+    async function submitToGoogleForm({ name, serial, score, percent }) {
+      if (!FORM_ACTION_URL) {
+        console.warn('FORM_ACTION_URL not set.');
+        return { ok: false, error: 'missing_form_config' };
+      }
+      try {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = FORM_ACTION_URL;
+        const iframeName = 'hidden_iframe_' + Date.now();
+        form.target = iframeName;
+
+        function addInput(nameAttr, value){
+          const inp = document.createElement('input');
+          inp.type = 'hidden';
+          inp.name = nameAttr;
+          inp.value = value;
+          form.appendChild(inp);
+        }
+
+        addInput(ENTRY_NAME, name || 'Anonymous');
+        addInput(ENTRY_SERIAL, serial || '');
+        addInput(ENTRY_SCORE, String(score || 0));
+        if (ENTRY_PERCENT) addInput(ENTRY_PERCENT, String(percent || 0));
+
+        const iframe = document.createElement('iframe');
+        iframe.name = iframeName;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+        document.body.appendChild(form);
+
+        form.submit();
+
+        setTimeout(()=>{ form.remove(); iframe.remove(); }, 1500);
+        return { ok: true };
+      } catch (err) {
+        console.error('submitToGoogleForm error',err);
+        return { ok: false, error: err.message || String(err) };
+      }
+    }
+
+    // local fallback save
+    const LOCAL_RESULTS_KEY = 'freshers_quiz_results_v1';
+    function saveResultLocally(name, serial, score, percent) {
+      const arr = JSON.parse(localStorage.getItem(LOCAL_RESULTS_KEY) || '[]');
+      arr.push({ name, serial, score, percent, ts: new Date().toISOString() });
+      localStorage.setItem(LOCAL_RESULTS_KEY, JSON.stringify(arr));
+    }
+    function downloadLocalResultsCSV(){
+      const arr = JSON.parse(localStorage.getItem(LOCAL_RESULTS_KEY) || '[]');
+      if (!arr.length) return alert('No local results.');
+      const headers = ['Name','Serial','Score','Percent','Timestamp'];
+      const rows = arr.map(r => [csvEscape(r.name),csvEscape(r.serial),r.score,r.percent,r.ts].join(','));
+      const csv = [headers.join(','), ...rows].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'local-quiz-results.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    }
+    function csvEscape(s){ return `"${String(s||'').replace(/"/g,'""')}"` }
+
+    // expose helpers
+    window.downloadLocalResultsCSV = downloadLocalResultsCSV;
+    window.getSubmittedSerials = getSubmittedSerials;
+
+    // focus
+    playerNameInput.focus();
+  </script>
+</body>
+</html>

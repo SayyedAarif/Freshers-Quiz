@@ -230,8 +230,6 @@
       <h1>Freshers Quiz</h1>
       <div class="small">Seniors are watching 👀</div>
     </div>
-
-    <!-- SPLASH with name + serial -->
     <div id="splash" class="splash" role="dialog" aria-modal="true">
       <!-- Updated welcome text for Gen Z feel -->
       <h2>“Naye ho? Let’s see tum sach me smart ho ya bas form fill kiya tha”</h2>
@@ -243,8 +241,6 @@
       <button id="startBtn" class="start-btn" disabled>Start Quiz</button>
       <div id="dupHint" class="small" style="display:none">Warning: This serial already submitted on this device.</div>
     </div>
-
-    <!-- QUIZ AREA -->
     <div id="quizArea" style="display:none">
       <div class="progress-wrap">
         <div class="small" id="progressText">Question 1 / 10</div>
@@ -263,13 +259,11 @@
   </div>
 
   <script>
-    /* ========== CONFIG: filled from your prefill link ========== */
     const FORM_ACTION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSefxXQZK7JXFIjp7jgQbNL23DJKNrEo3c__3CIl83ymbEcR0A/formResponse';
     const ENTRY_NAME = 'entry.69998990';    // Name
     const ENTRY_SERIAL = 'entry.1113296880';// Serial No
     const ENTRY_SCORE = 'entry.756546173';  // Score
-    const ENTRY_PERCENT = '';               // no percent entry in provided prefill link (optional)
-    /* ================================================================== */
+    const ENTRY_PERCENT = '';               //
 
     // quiz data
     const quizData = [

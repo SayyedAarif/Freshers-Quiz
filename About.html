@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | Learnix</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#0ea5e9',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-ring {
+            position: relative;
+        }
+
+        .profile-ring::after {
+            content: '';
+            position: absolute;
+            inset: -15px;
+            border: 2px dashed #2563eb;
+            border-radius: 50px;
+            opacity: 0.3;
+            animation: spin 20s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-nav px-6 py-4 flex justify-between items-center transition-all">
+        <div class="flex items-center gap-2">
+            <div class="bg-primary p-2 rounded-lg">
+                <i class="fas fa-graduation-cap text-white text-xl"></i>
+            </div>
+            <span class="text-2xl font-bold text-primary">Learnix</span>
+        </div>
+        <div class="hidden md:flex gap-8 font-medium">
+            <a href="index.html" class="hover:text-primary transition-colors">Home</a>
+            <a href="#" class="text-primary font-bold">About Me</a>
+            <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+        </div>
+        <button class="bg-primary text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:scale-105 transition-all">
+            Join Platform
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-40 pb-20 px-6 max-w-7xl mx-auto">
+        <div class="flex flex-col lg:flex-row items-center gap-16 animate-fade-in">
+            
+            <!-- Profile Image Holder -->
+            <div class="flex-1 w-full max-w-md">
+                <div class="profile-ring">
+                    <!-- PASTE YOUR IMAGE URL IN THE SRC BELOW -->
+                    <img src="https://via.placeholder.com/500x600?text=Paste+Your+Image+Link+Here" 
+                         alt="Founder Portrait" 
+                         class="w-full h-auto rounded-[40px] shadow-2xl relative z-10 border-4 border-white bg-slate-200">
+                </div>
+            </div>
+
+            <!-- Content Side -->
+            <div class="flex-1 space-y-8">
+                <div>
+                    <span class="text-primary font-bold tracking-widest uppercase text-xs">Meet the Creator</span>
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mt-2">
+                        I am <span class="text-primary">[Your Name]</span>
+                    </h1>
+                </div>
+                
+                <p class="text-lg text-slate-600 leading-relaxed italic">
+                    "My mission is to simplify the technical journey for every diploma student in the country."
+                </p>
+
+                <p class="text-slate-600 leading-relaxed">
+                    Welcome to Learnix! I started this platform with a single goal: to provide high-quality, organized, and free study materials to diploma students. Having seen the struggle students face in finding the right previous year papers and concise notes, I decided to build a one-stop destination for all academic needs.
+                </p>
+
+                <div class="grid grid-cols-2 gap-6 pt-4">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                        <div class="text-3xl font-bold text-primary mb-1">5K+</div>
+                        <div class="text-sm text-slate-500 font-medium">Active Students</div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                        <div class="text-3xl font-bold text-primary mb-1">200+</div>
+                        <div class="text-sm text-slate-500 font-medium">Study Guides</div>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 hover:bg-primary hover:text-white transition-all"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 hover:bg-primary hover:text-white transition-all"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 hover:bg-primary hover:text-white transition-all"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vision/Mission Section -->
+        <section class="mt-32 grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div class="bg-primary/5 p-12 rounded-[40px] border border-primary/10">
+                <div class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center text-xl mb-6">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Our Vision</h3>
+                <p class="text-slate-600 leading-relaxed">To become the most trusted digital library for diploma education, helping students bridge the gap between classroom learning and exam excellence.</p>
+            </div>
+
+            <div class="bg-emerald-50 p-12 rounded-[40px] border border-emerald-100">
+                <div class="w-12 h-12 bg-emerald-500 text-white rounded-xl flex items-center justify-center text-xl mb-6">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Our Mission</h3>
+                <p class="text-slate-600 leading-relaxed">Providing accessible, high-quality resources including solved papers, revision maps, and career guidance to ensure every student can succeed regardless of their background.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-slate-900 py-16 px-6 text-center">
+        <div class="max-w-4xl mx-auto space-y-6">
+            <h2 class="text-white text-3xl font-bold">Have any questions?</h2>
+            <p class="text-slate-400">Feel free to reach out to me for collaborations or study help.</p>
+            <a href="mailto:contact@learnix.com" class="inline-block bg-primary text-white px-8 py-3 rounded-full font-bold hover:scale-105 transition-all">Contact Me</a>
+            <div class="pt-8 text-slate-500 text-xs">
+                © 2024 Learnix | Designed by [Your Name]
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Civil Engineering Resources | Learnix</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#0ea5e9',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .subject-card {
+            transition: all 0.3s ease;
+        }
+
+        .subject-card:hover {
+            border-color: #2563eb;
+            transform: translateX(5px);
+        }
+
+        .sticky-side {
+            top: 120px;
+        }
+
+        .section-header {
+            position: sticky;
+            top: 72px;
+            z-index: 30;
+            background: rgba(248, 250, 252, 0.9);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-nav px-6 py-4 flex justify-between items-center transition-all">
+        <div class="flex items-center gap-2">
+            <div class="bg-primary p-2 rounded-lg">
+                <i class="fas fa-graduation-cap text-white text-xl"></i>
+            </div>
+            <span class="text-2xl font-bold text-primary">Learnix</span>
+        </div>
+        <div class="hidden md:flex gap-8 font-medium text-sm">
+            <a href="index.html" class="hover:text-primary transition-colors">Home</a>
+            <a href="materials.html" class="hover:text-primary transition-colors">All Branches</a>
+            <a href="about.html" class="hover:text-primary transition-colors">About</a>
+        </div>
+        <a href="contact.html" class="hidden md:block bg-primary/10 text-primary px-5 py-2 rounded-full font-bold text-sm hover:bg-primary hover:text-white transition-all">
+            Contribute Notes
+        </a>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="pt-32 pb-12 px-6 bg-white">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-6">
+            <div>
+                <nav class="flex text-xs text-slate-400 gap-2 mb-4 font-bold uppercase tracking-widest">
+                    <a href="index.html" class="hover:text-primary">Home</a>
+                    <span>/</span>
+                    <a href="materials.html" class="hover:text-primary">Materials</a>
+                    <span>/</span>
+                    <span class="text-slate-600">Civil Engineering</span>
+                </nav>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900">Civil Engineering</h1>
+                <p class="text-slate-500 mt-2">Comprehensive syllabus-based resources for all 6 semesters.</p>
+            </div>
+            <div class="flex gap-2">
+                <span class="px-4 py-2 bg-blue-50 text-primary rounded-xl text-sm font-bold border border-blue-100">
+                    Full Syllabus 2024
+                </span>
+            </div>
+        </div>
+    </header>
+<main class="max-w-7xl mx-auto px-6 py-12 flex flex-col lg:flex-row gap-12">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="lg:w-64 flex-shrink-0 hidden lg:block">
+            <div class="sticky sticky-side space-y-2">
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Jump to Semester</p>
+                <a href="#sem1" class="block p-3 rounded-xl hover:bg-white hover:shadow-sm hover:text-primary font-medium transition-all">Semester 1</a>
+                <a href="#sem2" class="block p-3 rounded-xl hover:bg-white hover:shadow-sm hover:text-primary font-medium transition-all">Semester 2</a>
+                <a href="#sem3" class="block p-3 rounded-xl hover:bg-white hover:shadow-sm hover:text-primary font-medium transition-all">Semester 3</a>
+                <a href="#sem4" class="block p-3 rounded-xl hover:bg-white hover:shadow-sm hover:text-primary font-medium transition-all">Semester 4</a>
+                <a href="#sem5" class="block p-3 rounded-xl hover:bg-white hover:shadow-sm hover:text-primary font-medium transition-all">Semester 5</a>
+                <a href="#sem6" class="block p-3 rounded-xl hover:bg-white hover:shadow-sm hover:text-primary font-medium transition-all">Semester 6</a>
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <div class="flex-grow space-y-20">
+
+            <!-- Semester 1 -->
+            <section id="sem1" class="space-y-6">
+                <div class="section-header py-4 border-b border-slate-200">
+                    <h2 class="text-2xl font-bold flex items-center gap-3">
+                        <span class="w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center text-sm">01</span>
+                        First Semester
+                    </h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Communication Skills-I</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Applied Physics</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Applied Chemistry</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Applied Mathematics-I</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Applied Mechanics</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+<!-- Semester 2 -->
+            <section id="sem2" class="space-y-6">
+                <div class="section-header py-4 border-b border-slate-200">
+                    <h2 class="text-2xl font-bold flex items-center gap-3">
+                        <span class="w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center text-sm">02</span>
+                        Second Semester
+                    </h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Applied Mathematics-II</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Basic Electrical Engineering</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Elements of Mechanical Engg.</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Surveying-I</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Engineering Drawing-I</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Semester 3 -->
+            <section id="sem3" class="space-y-6">
+                <div class="section-header py-4 border-b border-slate-200">
+                    <h2 class="text-2xl font-bold flex items-center gap-3">
+                        <span class="w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center text-sm">03</span>
+                        Third Semester
+                    </h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Building Construction</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Irrigation Engineering</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Surveying - II</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Hydraulics</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+</div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Computer Application</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Semester 4 -->
+            <section id="sem4" class="space-y-6">
+                <div class="section-header py-4 border-b border-slate-200">
+                    <h2 class="text-2xl font-bold flex items-center gap-3">
+                        <span class="w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center text-sm">04</span>
+                        Fourth Semester
+                    </h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Communication Skills II</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Concrete Technology</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Theory of Structures</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Environmental Engineering-I</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Construction Materials</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Semester 5 -->
+            <section id="sem5" class="space-y-6">
+                <div class="section-header py-4 border-b border-slate-200">
+                    <h2 class="text-2xl font-bold flex items-center gap-3">
+                        <span class="w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center text-sm">05</span>
+                        Fifth Semester
+                    </h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Soil Mechanics & Foundation Engg.</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Design of R.C.C. Structures-I</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Analysis of Structures</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Surveying – III</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Constr. Management & Accounts</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+<!-- Semester 6 -->
+            <section id="sem6" class="space-y-6">
+                <div class="section-header py-4 border-b border-slate-200">
+                    <h2 class="text-2xl font-bold flex items-center gap-3">
+                        <span class="w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center text-sm">06</span>
+                        Sixth Semester
+                    </h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Transportation Engineering</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Design of Steel Structures</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Estimating & Costing</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Design of R.C.C. Structures-II</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                    <div class="subject-card p-5 bg-white rounded-2xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <span class="font-bold text-slate-700">Environmental Engineering-II</span>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 bg-blue-50 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Notes</button>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-all">PYQs</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-slate-200 text-center">
+        <p class="text-sm text-slate-400">© 2024 Learnix Civil Hub. Build your future, brick by brick.</p>
+    </footer>
+
+    <script>
+        // Active Sidebar State Logic
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.sticky-side a');
+
+        window.addEventListener('scroll', () => {
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('bg-white', 'shadow-sm', 'text-primary');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('bg-white', 'shadow-sm', 'text-primary');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

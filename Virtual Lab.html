@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virtual Lab | Learnix Interactive Simulations</title>
+    <title>Virtual Lab | Learnix</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Poppins -->
@@ -21,7 +21,6 @@
                     colors: {
                         primary: '#2563eb',
                         secondary: '#0ea5e9',
-                        science: '#8b5cf6', // Purple for science/STEM feel
                     }
                 }
             }
@@ -29,6 +28,7 @@
     </script>
     
     <style>
+        /* Glassmorphism Navigation */
         .glass-nav {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(15px);
@@ -36,14 +36,15 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .lab-container {
-            height: calc(100vh - 180px);
+        /* Iframe Container Style */
+        .lab-viewport {
+            height: calc(100vh - 200px);
+            min-height: 500px;
             width: 100%;
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(139, 92, 246, 0.15); /* Science purple glow */
-            background: white;
-            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.1);
+            background: #000;
         }
 
         iframe {
@@ -72,17 +73,19 @@
             width: 100%;
         }
 
-        /* Custom scrollbar for better look */
-        ::-webkit-scrollbar {
-            width: 6px;
+        /* Loading Spinner */
+        .loader {
+            border-top-color: #2563eb;
+            animation: spinner 0.6s linear infinite;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 10px;
+
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
-<body class="bg-slate-50 font-sans text-slate-800 overflow-hidden">
+<body class="bg-slate-50 font-sans text-slate-800 overflow-x-hidden">
 
     <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 glass-nav px-6 py-4 flex justify-between items-center transition-all">
@@ -95,102 +98,119 @@
         <div class="hidden md:flex gap-8 font-medium text-sm">
             <a href="index.html" class="nav-link hover:text-primary transition-colors">Home</a>
             <a href="materials.html" class="nav-link hover:text-primary transition-colors">Materials</a>
+            <a href="#" class="text-primary font-bold">Virtual Lab</a>
             <a href="ebooks.html" class="nav-link hover:text-primary transition-colors">E-books</a>
-            <a href="#" class="text-science font-bold">Virtual Lab</a>
         </div>
-        <div class="flex items-center gap-4">
-            <a href="https://phet.colorado.edu/en/simulations/filter?subjects=earth-and-space&type=html" target="_blank" class="hidden sm:flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-science transition-colors">
-                <i class="fas fa-expand"></i> Full Screen
+        <div class="flex items-center gap-3">
+            <a href="https://phet.colorado.edu/en/simulations/magnet-and-compass" target="_blank" class="text-slate-400 hover:text-primary text-sm p-2">
+                <i class="fas fa-expand"></i>
             </a>
-            <button class="bg-science text-white px-5 py-2 rounded-full font-bold text-sm shadow-lg hover:bg-science/90 transition-all">
-                Join Lab
+            <button class="bg-primary text-white px-6 py-2 rounded-full font-bold text-sm shadow-lg hover:scale-105 transition-all">
+                Login
             </button>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <main class="pt-24 px-4 md:px-6 pb-6 h-screen flex flex-col">
+    <main class="pt-32 pb-12 px-6 max-w-7xl mx-auto">
         
-        <!-- Header & Breadcrumbs -->
-        <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-            <div>
-                <nav class="flex text-[10px] text-slate-400 gap-2 mb-1 font-bold uppercase tracking-widest">
-                    <a href="index.html">Home</a>
-                    <span>/</span>
-                    <span class="text-science">Virtual Lab</span>
-                </nav>
-                <h1 class="text-2xl font-extrabold text-slate-900 flex items-center gap-3">
-                    Interactive <span class="text-science">Science Lab</span>
-                    <i class="fas fa-flask text-science text-xl"></i>
-                </h1>
-                <p class="text-slate-500 text-xs mt-1">Experiment with Earth and Space simulations powered by PhET Colorado.</p>
-            </div>
-            <div class="flex gap-2">
-                <span class="px-3 py-1 bg-purple-50 text-science text-[10px] font-bold rounded-full border border-purple-100 flex items-center gap-1">
-                    <i class="fas fa-atom animate-spin-slow"></i> STEM Ready
-                </span>
-                <span class="px-3 py-1 bg-blue-50 text-primary text-[10px] font-bold rounded-full border border-blue-100 flex items-center gap-1">
-                    <i class="fas fa-mouse-pointer"></i> Interactive
-                </span>
-            </div>
-        </div>
-
-        <!-- Simulation Container (Iframe) -->
-        <div class="lab-container flex-grow relative">
-            <!-- Loading State -->
-            <div id="lab-loader" class="absolute inset-0 flex flex-col items-center justify-center bg-white z-0">
-                <div class="w-10 h-10 border-4 border-slate-100 border-t-science rounded-full animate-spin"></div>
-                <p class="mt-4 text-slate-400 text-xs font-semibold tracking-wider uppercase">Initializing Simulations...</p>
+        <!-- Header Section -->
+        <div class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+            <div class="space-y-2">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 text-primary rounded-full text-[10px] font-bold uppercase tracking-widest">
+                    <i class="fas fa-flask"></i> Interactive Physics
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900">Magnet & <span class="text-primary">Compass</span> Lab</h1>
+                <p class="text-slate-500 max-w-xl">Visualize magnetic fields and understand how a compass interacts with a bar magnet in this interactive simulation.</p>
             </div>
             
-            <!-- PhET Iframe -->
-            <iframe 
-                src="https://phet.colorado.edu/en/simulations/filter?subjects=earth-and-space&type=html" 
-                title="PhET Virtual Simulations"
-                onload="document.getElementById('lab-loader').style.display='none';"
-                class="relative z-10"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-            </iframe>
+            <div class="flex gap-3">
+                <div class="bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-100 flex items-center gap-2">
+                    <i class="fas fa-bolt text-amber-500"></i>
+                    <span class="text-xs font-bold text-slate-600">PhET Simulation</span>
+                </div>
+                <div class="bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-100 flex items-center gap-2">
+                    <i class="fas fa-check-circle text-emerald-500"></i>
+                    <span class="text-xs font-bold text-slate-600">Ready to Learn</span>
+                </div>
+            </div>
         </div>
 
-        <!-- Warning / Mobile Compatibility Notice -->
-        <div class="mt-4 flex items-center justify-center gap-4">
-            <p class="text-[10px] text-slate-400 font-medium">
-                <i class="fas fa-info-circle mr-1"></i> These simulations are HTML5 based and work best on Tablets and Desktops.
-            </p>
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Lab Viewport -->
+            <div class="lg:col-span-3 space-y-6">
+                <div class="lab-viewport relative group">
+                    <!-- Loader -->
+                    <div id="lab-loader" class="absolute inset-0 bg-white flex flex-col items-center justify-center z-10 transition-opacity duration-500">
+                        <div class="loader w-12 h-12 border-4 border-slate-200 rounded-full mb-4"></div>
+                        <p class="text-slate-400 font-medium text-sm animate-pulse">Initializing Virtual Lab...</p>
+                    </div>
+
+                    <!-- External Iframe -->
+                    <iframe 
+                        src="https://phet.colorado.edu/sims/html/magnet-and-compass/latest/magnet-and-compass_all.html" 
+                        allowfullscreen
+                        onload="document.getElementById('lab-loader').style.opacity = '0'; setTimeout(() => { document.getElementById('lab-loader').style.display = 'none'; }, 500);">
+                    </iframe>
+                </div>
+                
+                <!-- Lab Toolbar -->
+                <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex items-center gap-4">
+                        <button onclick="window.location.reload()" class="text-slate-500 hover:text-primary text-sm flex items-center gap-2">
+                            <i class="fas fa-sync-alt"></i> Reset Lab
+                        </button>
+                        <button class="text-slate-500 hover:text-primary text-sm flex items-center gap-2">
+                            <i class="fas fa-print"></i> Screenshot
+                        </button>
+                    </div>
+                    <p class="text-[10px] text-slate-400 font-medium uppercase tracking-widest">Powered by University of Colorado Boulder</p>
+                </div>
+            </div>
+
+            <!-- Experiment Sidebar -->
+            <div class="lg:col-span-1 space-y-6">
+                <div class="bg-white p-6 rounded-[32px] shadow-sm border border-slate-100">
+                    <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2">
+                        <i class="fas fa-list-check text-primary"></i> Lab Tasks
+                    </h3>
+                    <ul class="space-y-4 text-sm text-slate-500">
+                        <li class="flex gap-3">
+                            <span class="w-5 h-5 rounded-full bg-blue-50 text-primary text-[10px] font-bold flex items-center justify-center flex-shrink-0">1</span>
+                            Move the compass around the magnet to observe field direction.
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="w-5 h-5 rounded-full bg-blue-50 text-primary text-[10px] font-bold flex items-center justify-center flex-shrink-0">2</span>
+                            Observe the magnetic field lines inside the bar magnet.
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="w-5 h-5 rounded-full bg-blue-50 text-primary text-[10px] font-bold flex items-center justify-center flex-shrink-0">3</span>
+                            Switch to "Planet Earth" mode to see how a compass helps in navigation.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-900 p-6 rounded-[32px] text-white">
+                    <h3 class="font-bold mb-3 flex items-center gap-2">
+                        <i class="fas fa-lightbulb text-amber-400"></i> Pro Tip
+                    </h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        The compass needle's red end always points towards the Magnetic North. Try changing the magnet strength and see how the field lines respond!
+                    </p>
+                </div>
+
+                <a href="contact.html" class="block w-full text-center py-4 bg-primary/10 text-primary rounded-2xl font-bold text-sm hover:bg-primary hover:text-white transition-all">
+                    Request More Simulations
+                </a>
+            </div>
         </div>
     </main>
 
-    <style>
-        @keyframes spin-slow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        .animate-spin-slow {
-            animation: spin-slow 8s linear infinite;
-        }
-    </style>
+    <!-- Simple Footer -->
+    <footer class="py-8 text-center border-t border-slate-100">
+        <p class="text-xs text-slate-400">Learnix Virtual Labs &copy; 2024. Advancing Digital Education.</p>
+    </footer>
 
-    <script>
-        // Optional: Error handling if frame fails to load
-        setTimeout(() => {
-            const loader = document.getElementById('lab-loader');
-            if(loader && loader.style.display !== 'none') {
-                loader.innerHTML = `
-                    <div class="text-center p-6">
-                        <i class="fas fa-exclamation-triangle text-amber-500 text-3xl mb-4"></i>
-                        <p class="text-slate-700 font-bold">Having trouble loading?</p>
-                        <a href="https://phet.colorado.edu/en/simulations/filter?subjects=earth-and-space&type=html" 
-                           target="_blank" 
-                           class="mt-4 inline-block bg-science text-white px-6 py-2 rounded-full text-xs font-bold">
-                           Open Directly
-                        </a>
-                    </div>
-                `;
-            }
-        }, 8000); // 8 seconds timeout
-    </script>
 </body>
 </html>
 
